@@ -1,8 +1,8 @@
 pipeline {
     agent any
-	tools {
-		maven 'maven_path'
-		}
+    tools {
+        maven 'maven_path'
+        }
     stages {
         stage('SCM-Checkout') {
             steps {
@@ -22,8 +22,9 @@ pipeline {
         }
         stage('Ansible-Deployment') {
             steps {
-				ansiblePlaybook become: true, credentialsId: 'ec2-user', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts', playbook: 'install-httpd.yml'
+				ansiblePlaybook become: true, credentialsId: 'ansible-ssh-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'hosts', playbook: 'install-httpd.yml'
             }
         }
     }
 }
+
